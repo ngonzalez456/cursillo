@@ -2,46 +2,47 @@
 #define CALCULADORA_H
 
 template <typename data>
-class Calculadora {
-// hola y adiós    
-private:
-    int N;
-    AnyType* D;
 
+class Calculadora {
+    
 public:
 
-    SuperArray() {
-        N = 0;
-        D = 0;
+    void add(const data &d1, const data &d2){
+
+        return (d1 + d2);
+
+    };
+
+    void sub(const data &d1, const data &d2){
+
+        return (d1 - d2);
+
+    };
+
+    void mul(const data &d1, const data &d2){
+
+        return (d1 * d2);
+
+    };
+
+    void div(const data &d1, const data &d2){
+
+        return (d1 / d2);
+
+    };
+
+    void print(const data &d){
+
+    };
+
+    Calculadora() {
+        
     }
 
-    SuperArray(int c) {
-        N = c;
-        D = new AnyType[N];
-    }
+    virtual ~Calculadora() {
 
-    virtual ~SuperArray() {
-        delete[] D;
-    }
-
-    void Borrar() {
-        delete[] D;
-        N = 0;
-        D = 0;
-    }
-
-    AnyType operator[](int i) {
-        if (i >= 0 && i < N)
-            return D[i];
-    }
-
-    int largo() {
-        return N;
     }
 
 };
-
-
-
 
 #endif /* CALCULADORA_H */
