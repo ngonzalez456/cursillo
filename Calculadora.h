@@ -3,10 +3,6 @@
 
 template <typename data>
 class Calculadora {
-    
-private:
-    int N;
-    AnyType* D;
 
 public:
 
