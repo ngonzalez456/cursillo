@@ -3,7 +3,7 @@
 
 template <typename data>
 class Calculadora {
-    
+// hola y adiós    
 private:
     int N;
     AnyType* D;
