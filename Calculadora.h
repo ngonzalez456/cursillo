@@ -7,31 +7,31 @@ class Calculadora {
     
 public:
 
-    void add(const data &d1, const data &d2){
+    void add(data &d1, const data &d2){
 
         return (d1 + d2);
 
     };
 
-    void sub(const data &d1, const data &d2){
+    void sub(data &d1, const data &d2){
 
         return (d1 - d2);
 
     };
 
-    void mul(const data &d1, const data &d2){
+    void mul(data &d1, const data &d2){
 
         return (d1 * d2);
 
     };
 
-    void div(const data &d1, const data &d2){
+    void div(data &d1, const data &d2){
 
         return (d1 / d2);
 
     };
 
-    void print(const data &d){
+    void print(data &d){
 
     };
 
