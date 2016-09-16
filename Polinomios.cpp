@@ -1,32 +1,84 @@
 #include "Calculadora.h"
+#include "Polinomioss.h"
+#include <iostream>
 
-Polinomio::Polinomio() {};
+Polinomios::Polinomios() {};
 
-Polinomio::Polinomio(string nombre, string color) {
-    this->nombre = nombre;
-    this->color = color;
+Polinomios::Polinomios(double arreglo[]) {
+
+    this -> arreglo[] = arreglo[];
+    
 };
 
-Polinomio::Polinomio(const Figuras& orig){};
+Polinomios::Polinomios(const Figuras& orig){};
 
-Polinomio::~Polinomio(){};
+Polinomios::~Polinomios(){};
 
-void Polinomio::operator+(){
+void Polinomios::operator+(Polinomios d1, Polinomios d2){
+    
+    if(d1.size() > d2.size()){
+        
+        cout << "Error al escribir los polinomios" << endl; 
+        
+    }
+        
+    else {       
+        
+        for(i = 0; i < d1.size(); i++) {
+        
+        d1[i] += d2[i];
+        
+        };
+    
+        return d1;
+    
+    }
+}
+
+void Polinomios::operator-(Polinomios d1, Polinomios d2){
+    
+    if(d1.size() > d2.size()){
+        
+        cout << "Error al escribir los polinomios" << endl; 
+        
+    }
+        
+    else {       
+        
+        for(i = 0; i < d1.size(); i++) {
+        
+        d1[i] -= d2[i];
+        
+        };
+    
+        return d1;
+    
+    }
     
 }
 
-void Polinomio::operator-(){
+void Polinomios::operator*(Polinomios d1, Polinomios d2){
+    
+    double total[d1.size() * d2.size()];
+    
+    for(i = 0; i < d1.size(); i++) {
+        
+        for (j = 0; j < d2.size(); j++) {
+            
+            total[i*j] += d1[i] * d2[j]; 
+            
+        }
+        
+    };
+    
+    return total[];
     
 }
 
-void Polinomio::operator*(){
+void Polinomios::operator/(){
     
 }
 
-void Polinomio::operator/(){
-    
-}
-
-void Polinomio::operator~(){
+void Polinomios::operator~(){
     
 }
