@@ -59,13 +59,13 @@ void Polinomios::operator-(Polinomios d1, Polinomios d2){
 
 void Polinomios::operator*(Polinomios d1, Polinomios d2){
     
-    double total[d1.size() * d2.size()];
+    double total[d1.size() + d2.size()];
     
     for(i = 0; i < d1.size(); i++) {
         
         for (j = 0; j < d2.size(); j++) {
             
-            total[i*j] += d1[i] * d2[j]; 
+            total[i+j] += d1[i] * d2[j]; 
             
         }
         
