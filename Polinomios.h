@@ -6,17 +6,24 @@
 class Polinomios {
 public:
     Polinomios();
-    Polinomios(double arreglo[]);
+    Polinomios(double p1[], int size1, double p2[], int size2);
     Polinomios(const Polinomios& orig);
     virtual ~Polinomios();
 
-    double arreglo[];
+    double d1[];
+    double d2[];
+    int size1;
+    int size2;
 
-    void operator+();
-    void operator-();
-    void operator*();
-    void operator/();
-    void operator~();
+    virtual void operator+();
+    virtual void operator-();
+    virtual void operator*();
+    virtual void operator/();
+    virtual void operator~();
+
+private:
+    double resultado[];
+
 };
 
 #endif // FIGURAS_H

@@ -1,22 +1,23 @@
 #include "Calculadora.h"
-#include "Polinomioss.h"
+#include "Polinomios.h"
 #include <iostream>
 
 Polinomios::Polinomios() {};
 
-Polinomios::Polinomios(double arreglo[]) {
+Polinomios::Polinomios(double d1[], int size1, double d2[], int size2) {
 
-    this -> arreglo[] = arreglo[];
+    this -> size1 = size1;
+    this -> size2 = size2;
+    this -> d1[size1] = d1[size1];
+    this -> d2[size2] = d2[size2];
     
 };
 
-Polinomios::Polinomios(const Figuras& orig){};
-
 Polinomios::~Polinomios(){};
 
-void Polinomios::operator+(Polinomios d1, Polinomios d2){
+void Polinomios::operator+(){
     
-    if(d1.size() > d2.size()){
+    if(size1 > size2){
         
         cout << "Error al escribir los polinomios" << endl; 
         
@@ -24,20 +25,17 @@ void Polinomios::operator+(Polinomios d1, Polinomios d2){
         
     else {       
         
-        for(i = 0; i < d1.size(); i++) {
+        for(int i = 0; i < size1; i++) {
         
         d1[i] += d2[i];
         
-        };
-    
-        return d1;
-    
+        };   
     }
 }
 
-void Polinomios::operator-(Polinomios d1, Polinomios d2){
+void Polinomios::operator-(){
     
-    if(d1.size() > d2.size()){
+    if(size1 > size2){
         
         cout << "Error al escribir los polinomios" << endl; 
         
@@ -45,34 +43,29 @@ void Polinomios::operator-(Polinomios d1, Polinomios d2){
         
     else {       
         
-        for(i = 0; i < d1.size(); i++) {
+        for(int i = 0; i < size1; i++) {
         
         d1[i] -= d2[i];
         
         };
-    
-        return d1;
-    
     }
     
 }
 
-void Polinomios::operator*(Polinomios d1, Polinomios d2){
+void Polinomios::operator*(){
     
-    double total[d1.size() + d2.size()];
+    resultado[size1 + size2];
     
-    for(i = 0; i < d1.size(); i++) {
+    for(int i = 0; i < size1; i++) {
         
-        for (j = 0; j < d2.size(); j++) {
+        for (int j = 0; j < size2; j++) {
             
-            total[i+j] += d1[i] * d2[j]; 
+            resultado[i+j] += d1[i] * d2[j]; 
             
         }
         
     };
-    
-    return total[];
-    
+
 }
 
 void Polinomios::operator/(){
@@ -80,5 +73,13 @@ void Polinomios::operator/(){
 }
 
 void Polinomios::operator~(){
+
+    for(int i = 0; i < size1; i++) {
+        
+        cout << resultado[i] << "x" << i << " ";
+        
+    };
+
+    cout << endl;
     
 }
