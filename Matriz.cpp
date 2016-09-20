@@ -1,62 +1,119 @@
-#include "Calculadora.h"
 #include "Matriz.h"
 
-
-Matriz::Matriz() {}
-
-Matriz::Matriz(double arreglo) {
-    this->arreglo=arreglo;    
+/**
+ * @brief Constructor vacio de clase Matriz.
+ */
+Matriz::Matriz() {
+    arreglo = new double*[filas];
+    for (int i = 0; i < filas; ++i) {
+        arreglo[i] = new int[columnas];
+    };
 }
 
-Matriz::Matriz(const Matriz& orig){}
+/**
+ * @brief Constructor sobrecargado de la clase Matriz.
+ *
+ * @param nombre Nombre de la figura.
+ * @param color Color de la figura.
+ */
+Matriz::Matriz(int columnas, int filas, double** arreglo) {
+    this->columnas = columnas;
+    this->filas = filas;
+    this->arreglo = arreglo;
+}
 
-Matriz::~Matriz(){}
+/**
+ * @brief Constructor de la clase Matriz.
+ *
+ * @param Matriz& Constante objeto.
+ */
+Matriz::Matriz(const Matriz& orig) {
+}
 
-void Matriz::operator+(double arreglo2, Matriz c){
-    for(int i; i<=7; i++){
-        for(int j; j<=7; j++){
-            c[i][j]=this->arreglo[i][j] + arreglo2[i][j];
+/**
+ * @brief Destructor de la clase Matriz.
+ */
+Matriz::~Matriz() {
+    for (int i = 0; i < this->filas; ++i) {
+        delete [] arreglo[i];
+    }
+    delete [] arreglo;
+}
+
+/**
+ * @brief Sobrecarga el operador + para sumar dos objetos tipo Matriz.
+ */
+Matriz Matriz::operator + (Matriz b) {
+    Matriz c;
+    c.columnas = this->columnas;
+    c.filas = this->filas;
+    for (int i; i <= 7; i++) {
+        for (int j; j <= 7; j++) {
+            c.arreglo[i][j] = this->arreglo[i][j] + b.arreglo[i][j];
         }
     }
+    return (c);
 }
 
-void Matriz::operator-(double arreglo2, Matriz c){
-    
-    for(int i; i<=7; i++){
-        for(int j; j<=7; j++){
-            c[i][j]= this->arreglo[i][j] - arreglo2[i][j];
+/**
+ * @brief Sobrecarga el operador - para restar dos objetos tipo Matriz.
+ */
+Matriz Matriz::operator - (Matriz b) {
+    Matriz c;
+    c.columnas = this->columnas;
+    c.filas = this->filas;
+    for (int i; i <= 7; i++) {
+        for (int j; j <= 7; j++) {
+            c.arreglo[i][j] = this->arreglo[i][j] - b.arreglo[i][j];
         }
     }
+    return (c);
 }
 
-void Matriz::operator*(double arreglo2, Matriz c){
-    
-    for(int i; i<=7; i++){
-        for(int j; j<=7; j++){
-            for(int k; k<=7; k++)
-            c[i][j]= this->arreglo[i][k] += arreglo2[k][j];
+/**
+ * @brief Sobrecarga el operador * para sumar dos objetos tipo Matriz.
+ */
+Matriz Matriz::operator*(Matriz b) {
+    Matriz c;
+    c.columnas = this->columnas;
+    c.filas = this->filas;
+    for (int i; i <= 7; i++) {
+        for (int j; j <= 7; j++) {
+            for (int k; k <= 7; k++)
+                c.arreglo[i][j] = this->arreglo[i][k] += b.arreglo[k][j];
         }
     }
+    return (c);
 }
 
-void Matriz::operator/(Matriz c){
-    while (sizeof(this->arreglo2)/4 != sizeof(c.arreglo)){
+/**
+ * @brief Sobrecarga el operador / para dividir dos objetos tipo Matriz.
+ */
+Matriz Matriz::operator / (Matriz b) {
+    while (this->filas != b.filas || this->columnas != b.columnas) {
         cout << "Introduzca una matriz cuadrada";
-    }    
-        for(int i; i<=7; i++){
-            for(int j; j<=7; j++){
-                c[i][j]= this->arreglo[i][j] / arreglo2[i][j];
-            }
+    }
+    Matriz c;
+    c.columnas = this->columnas;
+    c.filas = this->filas;
+    for (int i; i <= 7; i++) {
+        for (int j; j <= 7; j++) {
+            c.arreglo[i][j] = this->arreglo[i][j] / b.arreglo[i][j];
         }
-    
-    
+    }
+    return (c);
+
 }
 
-void Matriz::operator~(Matriz c){
-    for(int i; i<=7; i++){
+/**
+ * @brief Sobrecarga el operador ~ para imprimir los atributos de la clase.
+ */
+void Matriz::operator~() {
+    for (int i; i <= 7; i++) {
         cout << endl;
-        for(int j; j<=7; j++){
-            cout << c[i][j];
+        for (int j; j <= 7; j++) {
+            cout << this->arreglo[i][j];
         }
     }
 }
+
