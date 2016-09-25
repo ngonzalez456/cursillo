@@ -3,27 +3,31 @@
 
 #include <string>
 
+using namespace std;
+
 class Polinomios {
 public:
     Polinomios();
-    Polinomios(double p1[], int size1, double p2[], int size2);
+    Polinomios(int base, double* coeficientes);
     Polinomios(const Polinomios& orig);
     virtual ~Polinomios();
 
-    double d1[];
-    double d2[];
-    int size1;
-    int size2;
+    int base;
+    double* coeficientes;
 
-    virtual void operator+();
-    virtual void operator-();
-    virtual void operator*();
-    virtual void operator/();
-    virtual void operator~();
+    Polinomios operator+(Polinomios b);
+    Polinomios operator+= (Polinomios b);
+    Polinomios operator-= (Polinomios b);
+    Polinomios operator-(Polinomios b);
+    Polinomios operator*(Polinomios b);
+    Polinomios operator*= (Polinomios b);
+    Polinomios operator/= (Polinomios b);
+    Polinomios operator/(Polinomios b);
+    void operator~();
 
 private:
     double resultado[];
 
 };
 
-#endif // FIGURAS_H
+#endif // POLINOMIOS_H

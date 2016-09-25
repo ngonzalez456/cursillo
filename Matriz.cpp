@@ -71,7 +71,7 @@ Matriz Matriz::operator - (Matriz b) {
 }
 
 /**
- * @brief Sobrecarga el operador * para sumar dos objetos tipo Matriz.
+ * @brief Sobrecarga el operador * para multiplicar dos objetos tipo Matriz.
  */
 Matriz Matriz::operator*(Matriz b) {
     Matriz c;
