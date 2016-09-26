@@ -21,7 +21,6 @@ public:
     Polinomios operator-(Polinomios b);
     Polinomios operator*(Polinomios b);
     Polinomios operator*= (Polinomios b);
-    Polinomios operator/= (Polinomios b);
     Polinomios operator/(Polinomios b);
     void operator~();
 

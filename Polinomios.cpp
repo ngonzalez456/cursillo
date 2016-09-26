@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string.h>
 #include "Polinomios.h"
 
 /**
@@ -155,25 +154,95 @@ Polinomios Polinomios::operator*(Polinomios b){
 }
 
 /**
- * @brief Sobrecarga el operador /= para dividir constantes en tipo Polinomios.
- */
-Polinomios Polinomios::operator /= (Polinomios b)
-{
-
-    for (int i = 0; i <= base; ++i)
-    {
-        coeficientes[i] /= b.coeficientes[i];
-    }
-
-    return *this;
-}
-
-/**
  * @brief Sobrecarga el operador / para dividir dos objetos tipo Polinomios.
+ * Genera dos vectores, el vector q es el resultado de la division y el numero
+ * entero del tipo int que es el residuo
  */
 Polinomios Polinomios::operator /(Polinomios b)
 {
-    return Polinomios(b) /= b.coeficientes;
+    	Polinomios resultado;
+        double *N,*D,*d,*q,*r;	// vectors - N / D = q       N % D = r
+	int i, dd, dq, dr;				
+ 
+	this -> base = base;
+        int base2 = b.base;
+	
+	dq = this -> base - b.base;  
+	dr = this -> base - b.base;
+ 
+ 	N = new double [this -> base + 1];					
+	N = this -> coeficientes;
+	 
+	D = new double [b.base + 1];
+	D = b.coeficientes;
+ 
+	d = new double [this -> base + 1];
+	for( i = b.base + 1 ; i < this -> base + 1; i++ ) {
+		D[i] = 0;
+	}
+ 
+	q = new double [dq + 1];
+	for( i = 0 ; i < dq + 1 ; i++ ) {
+		q[i] = 0;
+	}
+ 
+	r = new double [dr + 1];
+	for( i = 0 ; i < dr + 1 ; i++ ) {
+		r[i] = 0;
+	}
+ 
+	if( b.base < 0) {
+		cout << "El grado debe ser mayor a 0.";
+	}
+ 
+	if( this -> base >= b.base ) {
+		while(this -> base >= b.base) {
+
+			for( i = 0 ; i < this -> base + 1 ; i++ ) {
+				d[i] = 0;
+			}
+			for( i = 0 ; i < b.base + 1 ; i++ ) {
+				d[i+ this -> base - b.base] = D[i];
+			}
+			dd = this -> base;
+
+
+			q[this -> base - b.base] = N[this -> base]/d[dd];
+
+ 
+
+			for( i = 0 ; i < dq + 1 ; i++ ) {
+				d[i] = d[i] * q[this -> base - b.base];
+			}
+
+ 
+
+			for( i = 0 ; i < this -> base + 1 ; i++ ) {
+				N[i] = N[i] - d[i];
+			}
+			this -> base --;
+
+			 
+		}
+ 
+	}
+ 
+	for( i = 0 ; i < this -> base + 1 ; i++ ) {
+		r[i] = N[i];
+	}
+	dr = this -> base;
+
+	delete [] N;
+	delete [] D;
+	delete [] d;
+	delete [] q;
+	delete [] r;
+
+        resultado.base = (sizeof(q)/sizeof(*q));
+        resultado.coeficientes = q;
+
+        return resultado;
+
 }
 
 /**
