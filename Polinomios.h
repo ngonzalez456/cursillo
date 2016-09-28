@@ -16,12 +16,9 @@ public:
     double* coeficientes;
 
     Polinomios operator+(const Polinomios &ELOTRO);
-    Polinomios operator+= (const Polinomios &ELOTRO);
-    Polinomios operator-= (const Polinomios &ELOTRO);
     Polinomios operator-(const Polinomios &ELOTRO);
     Polinomios operator*(const Polinomios &ELOTRO);
-    Polinomios operator*= (const Polinomios &ELOTRO);
-    Polinomios operator/(const Polinomios &ELOTRO);
+    Polinomios operator /(const Polinomios &ELOTRO);
     void operator~();
 
 private:

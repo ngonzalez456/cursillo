@@ -6,7 +6,7 @@
  */
 Polinomios::Polinomios() {
 
-    this -> base = 0;
+    this -> base = 1;
     this -> coeficientes = 0;
 
 };
@@ -39,129 +39,124 @@ Polinomios::Polinomios(const Polinomios& orig) {
 Polinomios::~Polinomios(){};
 
 /**
- * @brief Sobrecarga el operador += para sumar constantes en tipo Polinomios.
- */
-Polinomios Polinomios::operator+= (const Polinomios &ELOTRO) {
-
-    int tamano = (ELOTRO.base > base) ? ELOTRO.base : base;
-    
-    double *coefNuevo = new double [tamano]; 
-
-    for (int i = 0; i < tamano; i++) {
-        coefNuevo[i] = 0;
-    }
-    for (int i = 0; i < ELOTRO.base; i++) {
-        coefNuevo[i] += ELOTRO.coeficientes[i];
-    }
-    for (int i = 0; i < base; i++) {
-        coefNuevo[i] += coeficientes[i];
-    }
-    delete [] coeficientes; 
-    coeficientes = coefNuevo;
-    base = tamano;
-    return *this;
-}
-
-/**
  * @brief Sobrecarga el operador + para sumar dos objetos tipo Polinomios.
+ *
+ * @param &ELOTRO Objeto del tipo Polinomio.
  */
 Polinomios Polinomios::operator + (const Polinomios &ELOTRO){
+   
+    int a;
 
-    Polinomios resultado = *this;
-      
-    resultado += ELOTRO;
+    if (this->base < ELOTRO.base) {
+
+        a = ELOTRO.base;
+
+    }
+
+    else {
+
+        a = this -> base;
+
+    }
+
+    double *res = new double [a];
+
+    for (int i = 0; i < a; i++) {
+  
+    res[i] = ELOTRO.coeficientes[i] + coeficientes[i];
+
+    }
+
+    Polinomios resultado(a, res);
+
+    delete [] res;
+
+    return resultado;
+        
+}
+
+
+/**
+ * @brief Sobrecarga el operador - para restar dos objetos tipo Polinomios.
+ *
+ * @param &ELOTRO Objeto del tipo Polinomio.
+ */
+Polinomios Polinomios::operator - (const Polinomios &ELOTRO){
+    
+    int a;
+
+    if (this->base < ELOTRO.base) {
+
+        a = ELOTRO.base;
+
+    }
+
+    else {
+
+        a = this -> base;
+
+    }
+
+    double *res = new double [a];
+
+    for (int i = 0; i < a; i++) {
+
+    cout << coeficientes[i] << "   " << ELOTRO.coeficientes[i] << "    " << res[i] << endl;
+  
+    res[i] = coeficientes[i] - ELOTRO.coeficientes[i];
+
+    }
+
+    Polinomios resultado(a, res);
+
+    delete [] res;
 
     return resultado;
         
 }
 
 /**
- * @brief Sobrecarga el operador -= para restar constantes en tipo Polinomios.
- */
-Polinomios Polinomios::operator-= (const Polinomios &ELOTRO) {
-
-    Polinomios negativo = *this;
-
-    int size = (sizeof(coeficientes)/sizeof(*coeficientes));
-
-    double* coef = this -> coeficientes;
-
-    for (int i = 0; i < size; i++) {
-
-        coef[i] = coeficientes[i] * -1.0;
-
-    }
-
-    negativo.coeficientes = coef;
- 
-    Polinomios resultado = *this + (negativo);
- 
-    this->base = resultado.base;
-  
-    this->coeficientes = resultado.coeficientes;
- 
-    return *this;
-}
-
-
-/**
- * @brief Sobrecarga el operador - para restar dos objetos tipo Polinomios.
- */
-Polinomios Polinomios::operator - (const Polinomios &ELOTRO){
-    
-    Polinomios resultado = *this;
-
-    resultado -= ELOTRO;
-
-    return resultado;
-  
-}
-
-
-/**
- * @brief Sobrecarga el operador *= para multiplicar constantes en tipo Polinomios.
- */
-Polinomios Polinomios::operator*= (const Polinomios &ELOTRO) {
- 
-    this->base = this->base + ELOTRO.base;
-
-    int size = (sizeof(coeficientes)/sizeof(*coeficientes));
- 
-    double* resultado = this->coeficientes;
-
-    for (int i = 0; i < size; i++) {
-
-        resultado[i] = coeficientes[i] * ELOTRO.coeficientes[i];
-
-    }
- 
-    this->coeficientes = resultado;
- 
-    return *this;
-}
-
-/**
  * @brief Sobrecarga el operador * para multiplicar dos objetos tipo Polinomios.
+ *
+ * @param &ELOTRO Objeto del tipo Polinomio.
  */
 Polinomios Polinomios::operator*(const Polinomios &ELOTRO){
     
-    Polinomios resultado = *this;
+    int a = this -> base;
 
-    resultado *= ELOTRO;
+    int b = ELOTRO.base;
+
+    double *res = new double [a + b];
+
+    for (int i = 0; i < a; i++) {
+   
+        for (int j = 0; j < b; j++) {
+  
+             res[i + j] = ELOTRO.coeficientes[i] * coeficientes[j];
+
+        }
+
+    }
+
+    Polinomios resultado(a + b, res);
+
+    delete [] res;
 
     return resultado;
-
+        
 }
 
 /**
  * @brief Sobrecarga el operador / para dividir dos objetos tipo Polinomios.
  * Genera dos vectores, el vector q es el resultado de la division y el numero
  * entero del tipo int que es el residuo
+ *
+ * @param &ELOTRO Objeto del tipo Polinomio.
  */
 Polinomios Polinomios::operator /(const Polinomios &ELOTRO)
 {
     	Polinomios resultado;
-        double *N,*D,*d,*q,*r;	// vectors - N / D = q       N % D = r
+        double *N,*D,*d,*q,*r = new double;	// vectors - N / D = q       N % D = r
 	int i, dd, dq, dr;				
  
 	this -> base = base;
@@ -250,9 +245,7 @@ Polinomios Polinomios::operator /(const Polinomios &ELOTRO)
  */
 void Polinomios::operator~(){
 
-    int size1 = (sizeof(coeficientes)/sizeof(*coeficientes));
-
-    for(int i = 0; i < size1; i++) {
+   for(int i = 0; i < base; i++) {
         
         cout << coeficientes[i] << "x" << i << " ";
         
