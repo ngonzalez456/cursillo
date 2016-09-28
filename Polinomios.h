@@ -15,13 +15,13 @@ public:
     int base;
     double* coeficientes;
 
-    Polinomios operator+(Polinomios b);
-    Polinomios operator+= (Polinomios b);
-    Polinomios operator-= (Polinomios b);
-    Polinomios operator-(Polinomios b);
-    Polinomios operator*(Polinomios b);
-    Polinomios operator*= (Polinomios b);
-    Polinomios operator/(Polinomios b);
+    Polinomios operator+(const Polinomios &ELOTRO);
+    Polinomios operator+= (const Polinomios &ELOTRO);
+    Polinomios operator-= (const Polinomios &ELOTRO);
+    Polinomios operator-(const Polinomios &ELOTRO);
+    Polinomios operator*(const Polinomios &ELOTRO);
+    Polinomios operator*= (const Polinomios &ELOTRO);
+    Polinomios operator/(const Polinomios &ELOTRO);
     void operator~();
 
 private:

@@ -14,8 +14,8 @@ Polinomios::Polinomios() {
 /**
  * @brief Constructor sobrecargado de la clase Polinomios.
  *
- * @param d1 Arreglo de coeficientes del polinomio.
- * @param size Tamaño del arreglo d1.
+ * @param base Orden del polinomio.
+ * @param coeficientes Puntero de coeficientes del polinomio.
  */
 Polinomios::Polinomios(int base, double* coeficientes) {
 
@@ -41,17 +41,17 @@ Polinomios::~Polinomios(){};
 /**
  * @brief Sobrecarga el operador += para sumar constantes en tipo Polinomios.
  */
-Polinomios Polinomios::operator+= (Polinomios b) {
+Polinomios Polinomios::operator+= (const Polinomios &ELOTRO) {
 
-    int tamano = (b.base > base) ? b.base : base;
+    int tamano = (ELOTRO.base > base) ? ELOTRO.base : base;
     
     double *coefNuevo = new double [tamano]; 
 
     for (int i = 0; i < tamano; i++) {
         coefNuevo[i] = 0;
     }
-    for (int i = 0; i < b.base; i++) {
-        coefNuevo[i] += b.coeficientes[i];
+    for (int i = 0; i < ELOTRO.base; i++) {
+        coefNuevo[i] += ELOTRO.coeficientes[i];
     }
     for (int i = 0; i < base; i++) {
         coefNuevo[i] += coeficientes[i];
@@ -65,11 +65,11 @@ Polinomios Polinomios::operator+= (Polinomios b) {
 /**
  * @brief Sobrecarga el operador + para sumar dos objetos tipo Polinomios.
  */
-Polinomios Polinomios::operator + (Polinomios b){
+Polinomios Polinomios::operator + (const Polinomios &ELOTRO){
 
     Polinomios resultado = *this;
       
-    resultado += b;
+    resultado += ELOTRO;
 
     return resultado;
         
@@ -78,7 +78,7 @@ Polinomios Polinomios::operator + (Polinomios b){
 /**
  * @brief Sobrecarga el operador -= para restar constantes en tipo Polinomios.
  */
-Polinomios Polinomios::operator-= (Polinomios b) {
+Polinomios Polinomios::operator-= (const Polinomios &ELOTRO) {
 
     Polinomios negativo = *this;
 
@@ -107,11 +107,11 @@ Polinomios Polinomios::operator-= (Polinomios b) {
 /**
  * @brief Sobrecarga el operador - para restar dos objetos tipo Polinomios.
  */
-Polinomios Polinomios::operator - (Polinomios b){
+Polinomios Polinomios::operator - (const Polinomios &ELOTRO){
     
     Polinomios resultado = *this;
 
-    resultado -= b;
+    resultado -= ELOTRO;
 
     return resultado;
   
@@ -121,9 +121,9 @@ Polinomios Polinomios::operator - (Polinomios b){
 /**
  * @brief Sobrecarga el operador *= para multiplicar constantes en tipo Polinomios.
  */
-Polinomios Polinomios::operator*= (Polinomios b) {
+Polinomios Polinomios::operator*= (const Polinomios &ELOTRO) {
  
-    this->base = this->base + b.base;
+    this->base = this->base + ELOTRO.base;
 
     int size = (sizeof(coeficientes)/sizeof(*coeficientes));
  
@@ -131,7 +131,7 @@ Polinomios Polinomios::operator*= (Polinomios b) {
 
     for (int i = 0; i < size; i++) {
 
-        resultado[i] = coeficientes[i] * b.coeficientes[i];
+        resultado[i] = coeficientes[i] * ELOTRO.coeficientes[i];
 
     }
  
@@ -143,11 +143,11 @@ Polinomios Polinomios::operator*= (Polinomios b) {
 /**
  * @brief Sobrecarga el operador * para multiplicar dos objetos tipo Polinomios.
  */
-Polinomios Polinomios::operator*(Polinomios b){
+Polinomios Polinomios::operator*(const Polinomios &ELOTRO){
     
     Polinomios resultado = *this;
 
-    resultado *= b;
+    resultado *= ELOTRO;
 
     return resultado;
 
@@ -158,26 +158,26 @@ Polinomios Polinomios::operator*(Polinomios b){
  * Genera dos vectores, el vector q es el resultado de la division y el numero
  * entero del tipo int que es el residuo
  */
-Polinomios Polinomios::operator /(Polinomios b)
+Polinomios Polinomios::operator /(const Polinomios &ELOTRO)
 {
     	Polinomios resultado;
         double *N,*D,*d,*q,*r;	// vectors - N / D = q       N % D = r
 	int i, dd, dq, dr;				
  
 	this -> base = base;
-        int base2 = b.base;
+        int base2 = ELOTRO.base;
 	
-	dq = this -> base - b.base;  
-	dr = this -> base - b.base;
+	dq = this -> base - ELOTRO.base;  
+	dr = this -> base - ELOTRO.base;
  
  	N = new double [this -> base + 1];					
 	N = this -> coeficientes;
 	 
-	D = new double [b.base + 1];
-	D = b.coeficientes;
+	D = new double [ELOTRO.base + 1];
+	D = ELOTRO.coeficientes;
  
 	d = new double [this -> base + 1];
-	for( i = b.base + 1 ; i < this -> base + 1; i++ ) {
+	for( i = ELOTRO.base + 1 ; i < this -> base + 1; i++ ) {
 		D[i] = 0;
 	}
  
@@ -191,28 +191,28 @@ Polinomios Polinomios::operator /(Polinomios b)
 		r[i] = 0;
 	}
  
-	if( b.base < 0) {
+	if( ELOTRO.base < 0) {
 		cout << "El grado debe ser mayor a 0.";
 	}
  
-	if( this -> base >= b.base ) {
-		while(this -> base >= b.base) {
+	if( this -> base >= ELOTRO.base ) {
+		while(this -> base >= ELOTRO.base) {
 
 			for( i = 0 ; i < this -> base + 1 ; i++ ) {
 				d[i] = 0;
 			}
-			for( i = 0 ; i < b.base + 1 ; i++ ) {
-				d[i+ this -> base - b.base] = D[i];
+			for( i = 0 ; i < ELOTRO.base + 1 ; i++ ) {
+				d[i+ this -> base - ELOTRO.base] = D[i];
 			}
 			dd = this -> base;
 
 
-			q[this -> base - b.base] = N[this -> base]/d[dd];
+			q[this -> base - ELOTRO.base] = N[this -> base]/d[dd];
 
  
 
 			for( i = 0 ; i < dq + 1 ; i++ ) {
-				d[i] = d[i] * q[this -> base - b.base];
+				d[i] = d[i] * q[this -> base - ELOTRO.base];
 			}
 
  
