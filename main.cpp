@@ -19,15 +19,7 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-	
-    double d1[] = {1,2,3};
-    double d2[] = {3,2,1};
 
-    int size1 = (sizeof(d1)/sizeof(*d1));
-    int size2 = (sizeof(d2)/sizeof(*d2)); 
-    
-    Polinomios p1(d1, size1, d2, size2);
-    
     Calculadora<Fracciones> fr;
     
     Fracciones fa;
@@ -42,6 +34,18 @@ int main(int argc, char** argv) {
     
     f=fr.add(fa, fb);    
     fr.print(f);
+	
+    Calculadora<Fracciones> pol;
+	
+    double a[] = {1, 2, 3};
+    Polinomios p1(3, a);
+   
+    double b[] = {4, 5, 6};
+    Polinomios p2(3, b);
+
+    Polinomios p3;  
+    p3=pol.add(p1, p2);
+    pol.print(p3);
     
         
     return 0;
