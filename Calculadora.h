@@ -1,14 +1,6 @@
 #ifndef CALCULADORA_H
 #define CALCULADORA_H
 
-#include <cstdlib>
-#include <string>
-#include <ctime>
-#include <iostream>
-
-#include "Matriz.h"
-
-using namespace std;
 
 template <typename data>
 
@@ -16,37 +8,38 @@ class Calculadora {
     
 public:
     
-    Calculadora();
-    Calculadora();
-    Calculadora(const Calculadora& orig);
-    virtual ~Calculadora();
-
-    void add(data &d1, const data &d2){
-
-        return (d1 + d2);
+    Calculadora(){}; 
+    Calculadora(const Calculadora& orig){};
+    virtual ~Calculadora(){};
+    
+    data add(data &d1,  const data &d2){
+        
+        return(d1 + d2);
 
     }
 
-    void sub(data &d1, const data &d2){
+    data sub(data &d1, const data &d2){
 
         return (d1 - d2);
 
     }
 
-    void mul(data &d1, const data &d2){
+    data mul(data &d1, const data &d2){
 
         return (d1 * d2);
 
     }
 
-    void div(data &d1, const data &d2){
+    data div(data &d1, const data &d2){
 
         return (d1 / d2);
 
     }
 
-    void print(data &d);
-
+    void print(data &d){
+        ~d;        
+    }
 };
 
-#endif /* CALCULADORA_H */
+
+#endif /* CALCULADORA_H *

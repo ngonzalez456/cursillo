@@ -28,20 +28,22 @@ int main(int argc, char** argv) {
     
     Polinomios p1(d1, size1, d2, size2);
     
+    Calculadora<Fracciones> fr;
+    
+    Fracciones fa;
+    fa.numerador=3;
+    fa.denominador=4;
+    
+    Fracciones fb;
+    fb.numerador=2;
+    fb.denominador=4;
+    
     Fracciones f;
     
-    Matriz ma;
-    ma.columnas=5;
-    ma.filas=5;
-    ma.arreglo[filas][columnas];
+    f=fr.add(fa, fb);    
+    fr.print(f);
     
-    Matriz mb;
-    mb.columnas=5;
-    mb.filas=5;
-    mb.arreglo[filas][columnas];
-    
-    Matriz c;
-    c = ma+mb;
-    ~c;
+        
+    return 0;
 
 }

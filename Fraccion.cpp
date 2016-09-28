@@ -1,4 +1,4 @@
-#include "Fraccion.h"
+#include "Fracciones.h"
 
 /**
  * @brief Constructor vacio de clase Fracciones.
@@ -24,7 +24,8 @@ Fracciones::Fracciones(int numerador, int denominador) {
  *
  * @param Fracciones& Constante objeto.
  */
-Fracciones::Fracciones(const Fracciones& orig){};
+Fracciones::Fracciones(const Fracciones& orig) {
+};
 
 /**
  * @brief Destructor de la clase Fracciones.
@@ -35,33 +36,30 @@ Fracciones::~Fracciones() {
 /**
  * @brief Sobrecarga el operador + para sumar dos objetos tipo Fracciones.
  */
-Fracciones Fracciones::operator+(Fracciones b) {
-    Fracciones c;
-    c.denominador;
-    c.numerador;
-    if (this->denominador == b.denominador) {
-        c.numerador = this->numerador + b.numerador;
+Fracciones Fracciones::operator+(const Fracciones &ELOTRO) {    
+   Fracciones c;    
+    if (this->denominador == ELOTRO.denominador) {
+        c.numerador = this->numerador + ELOTRO.numerador;
         c.denominador = this->denominador;
     } else {
-        c.numerador = b.denominador * this->numerador + this->denominador * b.numerador;
-        c.denominador = this->denominador * b.denominador;
+        c.numerador = ELOTRO.denominador * this->numerador + this->denominador * ELOTRO.numerador;
+        c.denominador = this->denominador * ELOTRO.denominador;
     }
     return c;
+
 }
 
 /**
  * @brief Sobrecarga el operador - para restar dos objetos tipo Fracciones.
  */
-Fracciones Fracciones::operator-(Fracciones b) {
-    Fracciones c;
-    c.denominador;
-    c.numerador;
-    if (this->denominador == b.denominador) {
-        c.numerador = this->numerador - b.numerador;
+Fracciones Fracciones::operator-(const Fracciones &ELOTRO) {
+    Fracciones c;    
+    if (this->denominador == ELOTRO.denominador) {
+        c.numerador = this->numerador - ELOTRO.numerador;
         c.denominador = this->denominador;
     } else {
-        c.numerador = b.denominador * this->numerador - this->denominador * b.numerador;
-        c.denominador = this->denominador * b.denominador;
+        c.numerador = ELOTRO.denominador * this->numerador - this->denominador * ELOTRO.numerador;
+        c.denominador = this->denominador * ELOTRO.denominador;
     }
     return c;
 }
@@ -69,30 +67,26 @@ Fracciones Fracciones::operator-(Fracciones b) {
 /**
  * @brief Sobrecarga el operador * para sumar dos objetos tipo Fracciones.
  */
-Fracciones Fracciones::operator*(Fracciones b) {
+Fracciones Fracciones::operator*(const Fracciones &ELOTRO) {
     Fracciones c;
-    c.denominador;
-    c.numerador;
-    c.numerador = this->numerador * b.numerador;
-    c.denominador = this->denominador * b.denominador;
+    c.numerador = this->numerador * ELOTRO.numerador;
+    c.denominador = this->denominador * ELOTRO.denominador;
     return c;
 }
 
 /**
  * @brief Sobrecarga el operador / para dividir dos objetos tipo Fracciones.
  */
-Fracciones Fracciones::operator/(Fracciones b) {
+Fracciones Fracciones::operator/(const Fracciones &ELOTRO) {
     Fracciones c;
-    c.denominador;
-    c.numerador;
-    c.numerador = this->numerador * b.denominador;
-    c.denominador = this->denominador * b.numerador;
+    c.numerador = this->numerador * ELOTRO.denominador;
+    c.denominador = this->denominador * ELOTRO.numerador;
     return c;
 }
-
+    
 /**
  * @brief Sobrecarga el operador ~ para imprimir los atributos de la clase.
  */
 void Fracciones::operator~() {
-     cout << this->numerador << "/" << this->denominador;
+    cout << this->numerador << "/" << this->denominador << endl;
 }
