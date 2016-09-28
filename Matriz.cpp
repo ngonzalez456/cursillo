@@ -4,9 +4,10 @@
  * @brief Constructor vacio de clase Matriz.
  */
 Matriz::Matriz() {
+    
     arreglo = new double*[filas];
     for (int i = 0; i < filas; ++i) {
-        arreglo[i] = new int[columnas];
+        arreglo[i] = new double[columnas];
     };
 }
 
@@ -43,44 +44,44 @@ Matriz::~Matriz() {
 /**
  * @brief Sobrecarga el operador + para sumar dos objetos tipo Matriz.
  */
-Matriz Matriz::operator + (Matriz b) {
+Matriz Matriz::operator + (const Matriz &ELOTRO) {
     Matriz c;
     c.columnas = this->columnas;
     c.filas = this->filas;
-    for (int i; i <= 7; i++) {
-        for (int j; j <= 7; j++) {
-            c.arreglo[i][j] = this->arreglo[i][j] + b.arreglo[i][j];
+    for (int i; i <= this->filas; i++) {
+        for (int j; j <= this->columnas; j++) {
+            c.arreglo[i][j] = this->arreglo[i][j] + ELOTRO.arreglo[i][j];
         }
     }
-    return (c);
+    return c; 
 }
 
 /**
  * @brief Sobrecarga el operador - para restar dos objetos tipo Matriz.
  */
-Matriz Matriz::operator - (Matriz b) {
+Matriz Matriz::operator - (const Matriz &ELOTRO) {
     Matriz c;
     c.columnas = this->columnas;
     c.filas = this->filas;
     for (int i; i <= 7; i++) {
         for (int j; j <= 7; j++) {
-            c.arreglo[i][j] = this->arreglo[i][j] - b.arreglo[i][j];
+            c.arreglo[i][j] = this->arreglo[i][j] - ELOTRO.arreglo[i][j];
         }
     }
     return (c);
 }
 
 /**
- * @brief Sobrecarga el operador * para multiplicar dos objetos tipo Matriz.
+ * @brief Sobrecarga el operador * para sumar dos objetos tipo Matriz.
  */
-Matriz Matriz::operator*(Matriz b) {
+Matriz Matriz::operator*(const Matriz &ELOTRO) {
     Matriz c;
     c.columnas = this->columnas;
     c.filas = this->filas;
     for (int i; i <= 7; i++) {
         for (int j; j <= 7; j++) {
             for (int k; k <= 7; k++)
-                c.arreglo[i][j] = this->arreglo[i][k] += b.arreglo[k][j];
+                c.arreglo[i][j] = this->arreglo[i][k] += ELOTRO.arreglo[k][j];
         }
     }
     return (c);
@@ -89,8 +90,8 @@ Matriz Matriz::operator*(Matriz b) {
 /**
  * @brief Sobrecarga el operador / para dividir dos objetos tipo Matriz.
  */
-Matriz Matriz::operator / (Matriz b) {
-    while (this->filas != b.filas || this->columnas != b.columnas) {
+Matriz Matriz::operator / (const Matriz &ELOTRO) {
+    while (this->filas != ELOTRO.filas || this->columnas != ELOTRO.columnas) {
         cout << "Introduzca una matriz cuadrada";
     }
     Matriz c;
@@ -98,7 +99,7 @@ Matriz Matriz::operator / (Matriz b) {
     c.filas = this->filas;
     for (int i; i <= 7; i++) {
         for (int j; j <= 7; j++) {
-            c.arreglo[i][j] = this->arreglo[i][j] / b.arreglo[i][j];
+            c.arreglo[i][j] = this->arreglo[i][j] / ELOTRO.arreglo[i][j];
         }
     }
     return (c);
@@ -116,4 +117,3 @@ void Matriz::operator~() {
         }
     }
 }
-
