@@ -20,7 +20,7 @@ Polinomios::Polinomios() {
  */
 Polinomios::Polinomios(int base, double* coeficientes) {
 
-    this -> base = base;
+    this -> base = base - 1;
     this -> coeficientes = coeficientes;
     
 };
@@ -101,8 +101,6 @@ Polinomios Polinomios::operator - (const Polinomios &ELOTRO){
     double *res = new double [a];
 
     for (int i = 0; i < a; i++) {
-
-    cout << coeficientes[i] << "   " << ELOTRO.coeficientes[i] << "    " << res[i] << endl;
   
     res[i] = coeficientes[i] - ELOTRO.coeficientes[i];
 
@@ -228,8 +226,7 @@ Polinomios Polinomios::operator /(const Polinomios &ELOTRO)
  
 	}
  
-	Polinomios resultado(dq, q);
-        cout << dq << "          " << q[dq] << endl;
+	Polinomios resultado(dq + 1, q);
         
         delete [] N;
         delete [] D;
