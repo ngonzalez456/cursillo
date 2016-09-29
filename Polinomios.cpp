@@ -154,7 +154,7 @@ Polinomios Polinomios::operator*(const Polinomios &ELOTRO){
  */
 Polinomios Polinomios::operator /(const Polinomios &ELOTRO)
 {
-	int i, dd, dq, dr, dN, base2;				
+	int i, dd, dq, dN, base2;				
 
         dN = this -> base;
         base2 = ELOTRO.base;

@@ -42,4 +42,4 @@ public:
 };
 
 
-#endif /* CALCULADORA_H *
+#endif 

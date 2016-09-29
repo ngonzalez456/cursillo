@@ -1,4 +1,4 @@
-//**
+/**
  * @brief Encabezado de clase Fracciones.
  */
 
@@ -33,4 +33,4 @@ public:
 
 
 
-#endif /* FRACCIONES_H */
+#endif 
