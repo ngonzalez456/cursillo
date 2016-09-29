@@ -160,7 +160,6 @@ Polinomios Polinomios::operator /(const Polinomios &ELOTRO)
         base2 = ELOTRO.base;
 	
 	dq = dN - base2;  
-	dr = dN - base2;
  
  	double *N = new double [dN];					
 	
