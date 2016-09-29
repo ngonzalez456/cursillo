@@ -4,11 +4,7 @@
  * @brief Constructor vacio de clase Matriz.
  */
 Matriz::Matriz() {
-    
-    arreglo = new double*[filas];
-    for (int i = 0; i < filas; ++i) {
-        arreglo[i] = new double[columnas];
-    };
+
 }
 
 /**
@@ -35,40 +31,92 @@ Matriz::Matriz(const Matriz& orig) {
  * @brief Destructor de la clase Matriz.
  */
 Matriz::~Matriz() {
-    for (int i = 0; i < this->filas; ++i) {
-        delete [] arreglo[i];
-    }
-    delete [] arreglo;
+
+
 }
 
 /**
  * @brief Sobrecarga el operador + para sumar dos objetos tipo Matriz.
  */
-Matriz Matriz::operator + (const Matriz &ELOTRO) {
+Matriz Matriz::operator+(const Matriz &ELOTRO) {
     Matriz c;
-    c.columnas = this->columnas;
     c.filas = this->filas;
-    for (int i; i <= this->filas; i++) {
-        for (int j; j <= this->columnas; j++) {
-            c.arreglo[i][j] = this->arreglo[i][j] + ELOTRO.arreglo[i][j];
-        }
+    c.columnas = this->columnas;
+
+    double** array;
+    array = new double*[this->filas];
+    for (int i = 0; i < this->filas; ++i) {
+        array[i] = new double[this->columnas];
     }
-    return c; 
+
+    if (this->filas != ELOTRO.filas || this->columnas != ELOTRO.columnas) {
+        cout << "Tamaño incorrecto de la matriz. Debe introducir una matriz cuadrada\n";
+        for (int i = 0; i < this->filas; i++) {
+            for (int j = 0; j < this->columnas; j++) {
+                array[i][j] = 0;
+            }
+        }
+        c.arreglo = array;
+        return c;
+
+    } else {
+
+
+        for (int i = 0; i < this->filas; i++) {
+            for (int j = 0; j < this->columnas; j++) {
+                array[i][j] = this->arreglo[i][j] + ELOTRO.arreglo[i][j];
+            }
+        }
+        c.arreglo = array;
+        return c;
+
+    }
+    for (int i = 0; i < this->filas; ++i) {
+        delete [] array[i];
+    }
+    delete [] array;
+
 }
 
 /**
  * @brief Sobrecarga el operador - para restar dos objetos tipo Matriz.
  */
-Matriz Matriz::operator - (const Matriz &ELOTRO) {
+Matriz Matriz::operator-(const Matriz &ELOTRO) {
     Matriz c;
-    c.columnas = this->columnas;
     c.filas = this->filas;
-    for (int i; i <= 7; i++) {
-        for (int j; j <= 7; j++) {
-            c.arreglo[i][j] = this->arreglo[i][j] - ELOTRO.arreglo[i][j];
-        }
+    c.columnas = this->columnas;
+
+    double** array;
+    array = new double*[this->filas];
+    for (int i = 0; i < this->filas; ++i) {
+        array[i] = new double[this->columnas];
     }
-    return (c);
+
+    if (this->filas != ELOTRO.filas || this->columnas != ELOTRO.columnas) {
+        cout << "Tamaño incorrecto de la matriz. Debe introducir una matriz cuadrada\n";
+        for (int i = 0; i < this->filas; i++) {
+            for (int j = 0; j < this->columnas; j++) {
+                array[i][j] = 0;
+            }
+        }
+        c.arreglo = array;
+        return c;
+    } else {
+
+        for (int i = 0; i < this->filas; i++) {
+            for (int j = 0; j < this->columnas; j++) {
+                array[i][j] = this->arreglo[i][j] - ELOTRO.arreglo[i][j];
+            }
+        }
+        c.arreglo = array;
+
+        return c;
+    }
+
+    for (int i = 0; i < this->filas; ++i) {
+        delete [] array[i];
+    }
+    delete [] array;
 }
 
 /**
@@ -76,44 +124,94 @@ Matriz Matriz::operator - (const Matriz &ELOTRO) {
  */
 Matriz Matriz::operator*(const Matriz &ELOTRO) {
     Matriz c;
-    c.columnas = this->columnas;
     c.filas = this->filas;
-    for (int i; i <= 7; i++) {
-        for (int j; j <= 7; j++) {
-            for (int k; k <= 7; k++)
-                c.arreglo[i][j] = this->arreglo[i][k] += ELOTRO.arreglo[k][j];
-        }
+    c.columnas = this->columnas;
+
+    double** array;
+    array = new double*[this->filas];
+    for (int i = 0; i < this->filas; ++i) {
+        array[i] = new double[this->columnas];
     }
-    return (c);
+
+    if (this->columnas != ELOTRO.filas) {
+        cout << "Tamaño incorrecto de matriz" << endl;
+        for (int i = 0; i < this->filas; i++) {
+            for (int j = 0; j < this->columnas; j++) {
+                array[i][j] = 0;
+            }
+        }
+        c.arreglo = array;
+        return c;
+
+    } else {
+
+
+        for (int i = 0; i < this->filas; i++) {
+            for (int j = 0; j < ELOTRO.columnas; j++) {
+                for (int k = 0; k <this->columnas; k++)
+                    array[i][j] += this->arreglo[i][k] * ELOTRO.arreglo[k][j];
+            }
+        }
+        c.arreglo = array;
+
+        return c;
+    }
+
+    for (int i = 0; i < this->filas; ++i) {
+        delete [] array[i];
+    }
+    delete [] array;
 }
 
 /**
  * @brief Sobrecarga el operador / para dividir dos objetos tipo Matriz.
  */
-Matriz Matriz::operator / (const Matriz &ELOTRO) {
-    while (this->filas != ELOTRO.filas || this->columnas != ELOTRO.columnas) {
-        cout << "Introduzca una matriz cuadrada";
-    }
+Matriz Matriz::operator/(const Matriz &ELOTRO) {
     Matriz c;
-    c.columnas = this->columnas;
     c.filas = this->filas;
-    for (int i; i <= 7; i++) {
-        for (int j; j <= 7; j++) {
-            c.arreglo[i][j] = this->arreglo[i][j] / ELOTRO.arreglo[i][j];
-        }
-    }
-    return (c);
+    c.columnas = this->columnas;
 
+    double** array;
+    array = new double*[this->filas];
+    for (int i = 0; i < this->filas; ++i) {
+        array[i] = new double[this->columnas];
+    }
+
+    if (this->filas != ELOTRO.filas || this->columnas != ELOTRO.columnas) {
+        cout << "Tamaño incorrecto de la matriz. Debe introducir una matriz cuadrada\n";
+        for (int i = 0; i < this->filas; i++) {
+            for (int j = 0; j < this->columnas; j++) {
+                array[i][j] = 0;
+            }
+        }
+        c.arreglo = array;
+        return c;
+    } else {
+        for (int i = 0; i <this->filas; i++) {
+            for (int j = 0; j < this->columnas; j++) {
+                array[i][j] = this->arreglo[i][j] / ELOTRO.arreglo[i][j];
+            }
+        }
+        c.arreglo = array;
+
+        return c;
+    }
+    for (int i = 0; i < this->filas; ++i) {
+        delete [] array[i];
+    }
+    delete [] array;
 }
 
 /**
  * @brief Sobrecarga el operador ~ para imprimir los atributos de la clase.
  */
 void Matriz::operator~() {
-    for (int i; i <= 7; i++) {
-        cout << endl;
-        for (int j; j <= 7; j++) {
-            cout << this->arreglo[i][j];
+    for (int i = 0; i < this->filas; i++) {
+        cout << "\n";
+        for (int j = 0; j < this->columnas; j++) {
+            cout << this->arreglo[i][j] << "  ";
         }
     }
+    cout << "\n\n";
 }
+

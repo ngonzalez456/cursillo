@@ -1,4 +1,4 @@
-#include "Fracciones.h"
+#include "Fraccion.h"
 
 /**
  * @brief Constructor vacio de clase Fracciones.

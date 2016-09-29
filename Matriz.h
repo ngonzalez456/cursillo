@@ -16,20 +16,23 @@ using namespace std;
 class Matriz{
 public:
     Matriz();
-    Matriz(int columnas, int filas, double** arreglo);
+    Matriz(int columnas, int filas, double**arreglo);
     Matriz(const Matriz& orig);
     virtual ~Matriz();
     
-    int columnas;
-    int filas;
-    double ** arreglo;
-
-    
+   
+   
     Matriz operator+(const Matriz &ELOTRO);
     Matriz operator-(const Matriz &ELOTRO);
     Matriz operator*(const Matriz &ELOTRO);
     Matriz operator/(const Matriz &ELOTRO);
     virtual void operator~();
+    
+    int columnas;
+    int filas;
+    double** arreglo;
+
+  
 };
 #endif /* MATRIZ_H */
 
