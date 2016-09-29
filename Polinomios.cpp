@@ -20,7 +20,7 @@ Polinomios::Polinomios() {
  */
 Polinomios::Polinomios(int base, double* coeficientes) {
 
-    this -> base = base - 1;
+    this -> base = base;
     this -> coeficientes = coeficientes;
     
 };
@@ -226,7 +226,7 @@ Polinomios Polinomios::operator /(const Polinomios &ELOTRO)
  
 	}
  
-	Polinomios resultado(dq + 1, q);
+	Polinomios resultado(dq, q);
         
         delete [] N;
         delete [] D;
@@ -242,9 +242,11 @@ Polinomios Polinomios::operator /(const Polinomios &ELOTRO)
  */
 void Polinomios::operator~(){
 
-   for(int i = 0; i <= base; i++) {
+   cout << coeficientes[0] << " " ;
+
+   for(int i = 1; i < base; i++) {
         
-        cout << coeficientes[i] << "x" << i << " ";
+        cout << "+ " << coeficientes[i] << "x" << i << " ";
         
     };
 
