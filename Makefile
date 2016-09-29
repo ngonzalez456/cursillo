@@ -1,4 +1,3 @@
-// Makefile
 compilar:
 	g++ -Wall -o main.c++ main.cpp Fraccion.cpp Matriz.cpp Polinomios.cpp
 
