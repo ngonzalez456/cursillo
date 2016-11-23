@@ -14,6 +14,7 @@
 #ifndef PERCEPTRON_H
 #define PERCEPTRON_H
 
+#include<iostream>
 #include<vector>
 #include"Punto.h"
 
@@ -28,7 +29,7 @@ public:
     Perceptron(const Perceptron& orig);
     virtual ~Perceptron();
     double dotProduct(vector<Punto*> vec, vector<double> w, int order);
-    void learn(double n, vector<Punto*> vec);
+    void learn(double n, vector<Punto*> vec0, vector<Punto*> vec1);
 private:
 
 };

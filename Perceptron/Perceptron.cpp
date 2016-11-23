@@ -13,7 +13,7 @@
 
 #include "Perceptron.h"
 #include"Punto.h"
-#include<iostream>
+
 
 using namespace std;
 
@@ -31,8 +31,8 @@ Perceptron::Perceptron() {
  *
  * @param vec Vector de puntos definido por el usuario
  */
-Perceptron::Perceptron(vector<Punto*> vec){
-    for (int i = 0; i < vec.size(); i++){
+Perceptron::Perceptron(vector<Punto*> vec) {
+    for (int i = 0; i < vec.size(); i++) {
         this->puntos.push_back(vec[i]);
     }
 }
@@ -62,9 +62,10 @@ Perceptron::~Perceptron() {
 double Perceptron::dotProduct(vector<Punto*> vec, vector<double> w, int order) {
     double resultado = 0;
     for (int i = 0; i < w.size(); i++) {
-        resultado += w[w.size() - i] * vec[order]->pos[i];
+        resultado += w[i] * vec[order]->pos[i];
     }
     //cout << resultado << endl;
+
     return resultado;
 }
 
@@ -74,20 +75,36 @@ double Perceptron::dotProduct(vector<Punto*> vec, vector<double> w, int order) {
  * @param n Tamano de umbral (threshold)
  * @param vec Vector de puntos definido por el usuario
  */
-void Perceptron::learn(double n, vector<Punto*> vec){
-    
+void Perceptron::learn(double n, vector<Punto*> vec0, vector<Punto*> vec1) {
+
     // Definicion del vector de pesos
-    this->w.push_back(0);
-    this->w.push_back(1);
-    this->w.push_back(0.5);
-    
-    for (int j = 0; j < vec.size(); j++) {
-        if (this->dotProduct(vec, w, j) < 0) { //Cambiar condicion para efectos de Perceptron
+    srand(clock());
+    int j1 = rand() % 10;
+    int j2 = rand() % 10;
+    int j3 = rand() % 10;
+    this->w.push_back(j1);
+    this->w.push_back(j2);
+    this->w.push_back(j3);
+
+    cout << "Cluster 0: " << endl;
+
+    for (int j = 0; j < vec1.size(); j++) {
+        while (this->dotProduct(vec1, w, j) < 0) {
             for (int i = 0; i < w.size(); i++) {
-                this->w[i] = w[i] - n * vec[j]->pos[i];
-                //cout << w[i] << endl;
+                this->w[i] = w[i] + n * vec1[j]->pos[i];
+                cout << w[i] << endl;
             }
+            cout << endl;
         }
     }
-    
+    cout << "Cluster + " << endl;
+    for (int j = 0; j < vec0.size(); j++) {
+        while (this->dotProduct(vec0, w, j) > 0) { //Cambiar condicion para efectos de Perceptron
+            for (int i = 0; i < w.size(); i++) {
+                this->w[i] = w[i] - n * vec0[j]->pos[i];
+                cout << w[i] << endl;
+            }
+            cout << endl;
+        }
+    }
 }
